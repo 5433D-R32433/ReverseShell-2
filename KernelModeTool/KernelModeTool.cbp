@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="KernelModeTool" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/KernelModeTool" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/Debug/" />
+				<Option type="5" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/KernelModeTool" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/Release/" />
+				<Option type="5" />
+				<Option compiler="gcc" />
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-std=c99" />
+			<Add option="-m32" />
+			<Add directory="C:/Users/Or/Desktop/Hi_Driver/include" />
+			<Add directory="C:/MyPrograms/mingw64/x86_64-w64-mingw32/include/ddk" />
+			<Add directory="C:/MyPrograms/mingw64/x86_64-w64-mingw32/include" />
+		</Compiler>
+		<Linker>
+			<Add option="-m32" />
+			<Add option="-nostartfiles" />
+			<Add option="-Wl,--nostdlib" />
+			<Add option="-shared" />
+			<Add option="-Wl,--entry,_DriverEntry@8" />
+			<Add option="-Wl,--file-alignment,0x1000" />
+			<Add option="-Wl,--section-alignment,0x1000" />
+			<Add option="-Wl,--image-base,0x00010000" />
+			<Add library="ntoskrnl" />
+			<Add library="hal" />
+			<Add directory="C:/MyPrograms/mingw64/lib" />
+			<Add directory="C:/MyPrograms/mingw64/x86_64-w64-mingw32/lib32" />
+		</Linker>
+		<Unit filename="include/dbgutils.h" />
+		<Unit filename="include/driver/device_and_slink.h" />
+		<Unit filename="include/driver/irp_handling.h" />
+		<Unit filename="include/hide/file/filehider.h" />
+		<Unit filename="include/hide/file/filehider_algorithm.h" />
+		<Unit filename="include/hide/hide_management.h" />
+		<Unit filename="include/hide/process/processhider.h" />
+		<Unit filename="include/hide/process/processhider_algorithm.h" />
+		<Unit filename="include/hide/tcp/tcphider.h" />
+		<Unit filename="include/hook/hookfactory.h" />
+		<Unit filename="include/hook/predefined_ssdt_offsets_lookup.h" />
+		<Unit filename="include/hook/ssdt_utils.h" />
+		<Unit filename="src/driver/device_and_slink.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/irp_handling.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/hide/file/filehider.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/hide/file/filehider_algorithm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/hide/hide_management.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/hide/process/processhider.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/hide/process/processhider_algorithm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/hide/tcp/tcphider.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/hook/hookfactory.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/hook/predefined_ssdt_offsets_lookup.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/hook/ssdt_utils.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

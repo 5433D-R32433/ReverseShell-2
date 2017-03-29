@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="UserModeTool" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/UserModeTool" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-D_DEBUG" />
+					<Add directory="include/methods/driver" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/UserModeTool" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add directory="include/methods/driver" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-std=c++11" />
+			<Add option="-m32" />
+			<Add directory="include" />
+		</Compiler>
+		<Linker>
+			<Add option="-m32" />
+			<Add option="-lWS2_32" />
+			<Add library="gdi32" />
+		</Linker>
+		<Unit filename="include/command/CommandDispatcher.h" />
+		<Unit filename="include/command/execute/KeyloggerExecuter.h" />
+		<Unit filename="include/command/execute/ScreenshotExecuter.h" />
+		<Unit filename="include/command/interface/ICommandDispatcher.h" />
+		<Unit filename="include/command/interface/ICommandExecuter.h" />
+		<Unit filename="include/methods/driver/Installer.h" />
+		<Unit filename="include/methods/driver/SCManager.h" />
+		<Unit filename="include/methods/keylogger/IKeyloggerImplementation.h" />
+		<Unit filename="include/methods/keylogger/Keylogger.h" />
+		<Unit filename="include/methods/keylogger/KeysRecorder.h" />
+		<Unit filename="include/methods/screenshot/BmpScreenshot.h" />
+		<Unit filename="include/methods/screenshot/PNGEncoder.h" />
+		<Unit filename="include/methods/screenshot/StaticFunctions.h" />
+		<Unit filename="include/methods/screenshot/lodepng.h" />
+		<Unit filename="include/networking/BasicWinsockSocket.h" />
+		<Unit filename="include/networking/SockAddrIn.h" />
+		<Unit filename="include/networking/WinsockAddressedSocket.h" />
+		<Unit filename="include/networking/WinsockInitializer.h" />
+		<Unit filename="include/networking/WinsockTCPClient.h" />
+		<Unit filename="include/networking/WinsockTCPServer.h" />
+		<Unit filename="include/networking/WinsockTCPSocket.h" />
+		<Unit filename="include/networking/WinsockUDPClient.h" />
+		<Unit filename="include/networking/WinsockUDPServer.h" />
+		<Unit filename="include/networking/WinsockUDPSocket.h" />
+		<Unit filename="include/networking/interfaces/IClient.h" />
+		<Unit filename="include/networking/interfaces/IServer.h" />
+		<Unit filename="include/networking/interfaces/ISocket.h" />
+		<Unit filename="include/networking/interfaces/ITCPClient.h" />
+		<Unit filename="include/networking/interfaces/ITCPServer.h" />
+		<Unit filename="include/networking/interfaces/IUDPServer.h" />
+		<Unit filename="include/utils/builders.h" />
+		<Unit filename="src/command/CommandDispatcher.cpp" />
+		<Unit filename="src/command/execute/KeyloggerExecuter.cpp" />
+		<Unit filename="src/command/execute/ScreenshotExecuter.cpp" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/methods/driver/Installer.cpp" />
+		<Unit filename="src/methods/driver/SCManager.cpp" />
+		<Unit filename="src/methods/keylogger/Keylogger.cpp" />
+		<Unit filename="src/methods/keylogger/KeysRecorder.cpp" />
+		<Unit filename="src/methods/screenshot/BmpScreenshot.cpp" />
+		<Unit filename="src/methods/screenshot/PNGEncoder.cpp" />
+		<Unit filename="src/methods/screenshot/lodepng.cpp" />
+		<Unit filename="src/networking/BasicWinsockSocket.cpp" />
+		<Unit filename="src/networking/SockAddrIn.cpp" />
+		<Unit filename="src/networking/WinsockInitializer.cpp" />
+		<Unit filename="src/networking/WinsockTCPClient.cpp" />
+		<Unit filename="src/networking/WinsockTCPServer.cpp" />
+		<Unit filename="src/networking/WinsockUDPClient.cpp" />
+		<Unit filename="src/networking/WinsockUDPServer.cpp" />
+		<Unit filename="src/utils/builders.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
