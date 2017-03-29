@@ -71,6 +71,7 @@
 		<Unit filename="include/networking/interfaces/ITCPServer.h" />
 		<Unit filename="include/networking/interfaces/IUDPServer.h" />
 		<Unit filename="include/utils/builders.h" />
+		<Unit filename="include/utils/factory.h" />
 		<Unit filename="include/utils/registry/IRegistryEditor.h" />
 		<Unit filename="include/utils/registry/RegistryEditor.h" />
 		<Unit filename="src/command/CommandDispatcher.cpp" />
@@ -92,6 +93,7 @@
 		<Unit filename="src/networking/WinsockUDPClient.cpp" />
 		<Unit filename="src/networking/WinsockUDPServer.cpp" />
 		<Unit filename="src/utils/builders.cpp" />
+		<Unit filename="src/utils/factory.cpp" />
 		<Unit filename="src/utils/registry/RegistryEditor.cpp" />
 		<Extensions>
 			<code_completion />
