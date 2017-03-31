@@ -34,12 +34,36 @@
 			<Add option="-std=c++11" />
 			<Add option="-m32" />
 			<Add directory="include" />
+			<Add directory="../common/include" />
 		</Compiler>
 		<Linker>
 			<Add option="-m32" />
 			<Add option="-lWS2_32" />
 			<Add library="gdi32" />
 		</Linker>
+		<Unit filename="../common/include/networking/BasicWinsockSocket.h" />
+		<Unit filename="../common/include/networking/SockAddrIn.h" />
+		<Unit filename="../common/include/networking/WinsockAddressedSocket.h" />
+		<Unit filename="../common/include/networking/WinsockInitializer.h" />
+		<Unit filename="../common/include/networking/WinsockTCPClient.h" />
+		<Unit filename="../common/include/networking/WinsockTCPServer.h" />
+		<Unit filename="../common/include/networking/WinsockTCPSocket.h" />
+		<Unit filename="../common/include/networking/WinsockUDPClient.h" />
+		<Unit filename="../common/include/networking/WinsockUDPServer.h" />
+		<Unit filename="../common/include/networking/WinsockUDPSocket.h" />
+		<Unit filename="../common/include/networking/interfaces/IClient.h" />
+		<Unit filename="../common/include/networking/interfaces/IServer.h" />
+		<Unit filename="../common/include/networking/interfaces/ISocket.h" />
+		<Unit filename="../common/include/networking/interfaces/ITCPClient.h" />
+		<Unit filename="../common/include/networking/interfaces/ITCPServer.h" />
+		<Unit filename="../common/include/networking/interfaces/IUDPServer.h" />
+		<Unit filename="../common/src/networking/BasicWinsockSocket.cpp" />
+		<Unit filename="../common/src/networking/SockAddrIn.cpp" />
+		<Unit filename="../common/src/networking/WinsockInitializer.cpp" />
+		<Unit filename="../common/src/networking/WinsockTCPClient.cpp" />
+		<Unit filename="../common/src/networking/WinsockTCPServer.cpp" />
+		<Unit filename="../common/src/networking/WinsockUDPClient.cpp" />
+		<Unit filename="../common/src/networking/WinsockUDPServer.cpp" />
 		<Unit filename="include/command/CommandDispatcher.h" />
 		<Unit filename="include/command/execute/KeyloggerExecuter.h" />
 		<Unit filename="include/command/execute/ScreenshotExecuter.h" />
@@ -54,22 +78,6 @@
 		<Unit filename="include/methods/screenshot/PNGEncoder.h" />
 		<Unit filename="include/methods/screenshot/StaticFunctions.h" />
 		<Unit filename="include/methods/screenshot/lodepng.h" />
-		<Unit filename="include/networking/BasicWinsockSocket.h" />
-		<Unit filename="include/networking/SockAddrIn.h" />
-		<Unit filename="include/networking/WinsockAddressedSocket.h" />
-		<Unit filename="include/networking/WinsockInitializer.h" />
-		<Unit filename="include/networking/WinsockTCPClient.h" />
-		<Unit filename="include/networking/WinsockTCPServer.h" />
-		<Unit filename="include/networking/WinsockTCPSocket.h" />
-		<Unit filename="include/networking/WinsockUDPClient.h" />
-		<Unit filename="include/networking/WinsockUDPServer.h" />
-		<Unit filename="include/networking/WinsockUDPSocket.h" />
-		<Unit filename="include/networking/interfaces/IClient.h" />
-		<Unit filename="include/networking/interfaces/IServer.h" />
-		<Unit filename="include/networking/interfaces/ISocket.h" />
-		<Unit filename="include/networking/interfaces/ITCPClient.h" />
-		<Unit filename="include/networking/interfaces/ITCPServer.h" />
-		<Unit filename="include/networking/interfaces/IUDPServer.h" />
 		<Unit filename="include/utils/builders.h" />
 		<Unit filename="include/utils/factory.h" />
 		<Unit filename="include/utils/registry/IRegistryEditor.h" />
@@ -85,13 +93,6 @@
 		<Unit filename="src/methods/screenshot/BmpScreenshot.cpp" />
 		<Unit filename="src/methods/screenshot/PNGEncoder.cpp" />
 		<Unit filename="src/methods/screenshot/lodepng.cpp" />
-		<Unit filename="src/networking/BasicWinsockSocket.cpp" />
-		<Unit filename="src/networking/SockAddrIn.cpp" />
-		<Unit filename="src/networking/WinsockInitializer.cpp" />
-		<Unit filename="src/networking/WinsockTCPClient.cpp" />
-		<Unit filename="src/networking/WinsockTCPServer.cpp" />
-		<Unit filename="src/networking/WinsockUDPClient.cpp" />
-		<Unit filename="src/networking/WinsockUDPServer.cpp" />
 		<Unit filename="src/utils/builders.cpp" />
 		<Unit filename="src/utils/factory.cpp" />
 		<Unit filename="src/utils/registry/RegistryEditor.cpp" />
