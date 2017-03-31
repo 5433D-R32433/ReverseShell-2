@@ -20,7 +20,7 @@ public:
     Installer(const std::string& sys_file)
         : m_sys_file(sys_file)
     {}
-    virtual ~Installer() {}
+    virtual ~Installer() = default;
 
     /**
       * Use this function to get the sys file path.

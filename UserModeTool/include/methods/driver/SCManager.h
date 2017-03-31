@@ -12,6 +12,8 @@ namespace driver
   * Use this class to associate with sc.exe .
   * The .sys file must be in the current working directory.
   *
+  * The data pointers should be managed outside of this class.
+  *
   * Error codes are returned from GetLastError(). 0 means success.
   * https://msdn.microsoft.com/en-us/library/windows/desktop/ms679360(v=vs.85).aspx
   */
@@ -25,7 +27,7 @@ public:
           m_databaseName(lpDatabaseName),
           m_desiredAccess(dwDesiredAccess)
     {}
-    virtual ~SCManager() {}
+    virtual ~SCManager() = default;
 
     /**
       * Use this function to get a handle to the Windows' SCManager.

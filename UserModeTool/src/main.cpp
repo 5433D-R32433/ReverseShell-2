@@ -59,6 +59,8 @@ int main()
 
             client.reset(utils::builders::BuildClient());
 
+            Sleep(5000);
+
             client->Connect();
         }
     }

@@ -50,7 +50,7 @@ noexcept
     // Send byte array
     std::string byte_array = executer->ToByteArray(command_parts);
 
-    if ( byte_array.size() !=
+    if ( byte_array.size() > 0 && byte_array.size() !=
             (unsigned)connection.Send(byte_array.data(), byte_array.size()) )
         return ( false );
 

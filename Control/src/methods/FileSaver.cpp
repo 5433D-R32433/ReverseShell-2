@@ -9,14 +9,9 @@
 
 using namespace methods;
 
-FileSaver::FileSaver()
-{
-    buffer = new char[65536];
-}
-
 FileSaver::~FileSaver()
 {
-    delete[] buffer;
+    delete m_buffer;
 }
 
 bool
@@ -24,6 +19,7 @@ FileSaver::SaveASingleFile(
     std::string extension,
     std::ios_base::openmode open_mode,
     networking::ITCPClient& connection)
+noexcept
 {
     std::string file_name = LocalTimeFileName() + extension;
 
@@ -31,19 +27,19 @@ FileSaver::SaveASingleFile(
 
     while ( true )
     {
-        int bytes_received = connection.Recv(buffer, 65536);
+        int bytes_received = connection.Recv(m_buffer, 65536);
 
-        if ( 0 == strncmp(buffer + bytes_received - 3, "o.k", 3) )
+        if ( 0 == strncmp(m_buffer + bytes_received - 3, "o.k", 3) )
         {
-            output_file.write(buffer, bytes_received - 3);
+            output_file.write(m_buffer, bytes_received - 3);
 
             output_file.close();
             return ( true );
         }
 
-        else if ( 0 == strncmp(buffer + bytes_received - 3, "err", 3) )
+        else if ( 0 == strncmp(m_buffer + bytes_received - 3, "err", 3) )
         {
-            output_file.write(buffer, bytes_received - 3);
+            output_file.write(m_buffer, bytes_received - 3);
 
             output_file.close();
             return ( false );
@@ -51,7 +47,7 @@ FileSaver::SaveASingleFile(
 
         else
         {
-            output_file.write(buffer, bytes_received);
+            output_file.write(m_buffer, bytes_received);
         }
     }
 
@@ -62,7 +58,7 @@ FileSaver::SaveASingleFile(
 
 std::string
 FileSaver::LocalTimeFileName()
-const
+const noexcept
 {
     // Current date and time
     time_t rawtime;

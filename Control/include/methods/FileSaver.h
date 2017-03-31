@@ -1,16 +1,32 @@
 #pragma once
 
-#include "networking/interfaces/ITCPClient.h"
 #include <fstream>
+#include <memory>
+
+#include "networking/interfaces/ITCPClient.h"
 
 
 namespace methods
 {
+/**
+  * Use this class to save a file sent from remote tool.
+  */
 class FileSaver
 {
 public:
-    FileSaver();
+    FileSaver()
+        : m_buffer (new char[65536])
+    {}
+
     virtual ~FileSaver();
+
+    // Copy is forbidden
+    FileSaver(const FileSaver& other)            = delete;
+    FileSaver& operator=(const FileSaver& other) = delete;
+
+    // Move is forbidden
+    FileSaver(FileSaver&& other)            = delete;
+    FileSaver& operator=(FileSaver&& other) = delete;
 
     /**
       * This function saves a single file that is received from remote tool.
@@ -23,17 +39,18 @@ public:
       */
     bool SaveASingleFile(std::string extension,
                          std::ios_base::openmode open_mode,
-                         networking::ITCPClient& connection);
+                         networking::ITCPClient& connection)
+    noexcept;
 
 protected:
 
-    char *buffer;
+    char *m_buffer;
 
     /**
       * The name of the file will be the date and time it was saved at.
       * @return the generated name.
       */
-    std::string LocalTimeFileName() const;
+    std::string LocalTimeFileName() const noexcept;
 
 };
 }
