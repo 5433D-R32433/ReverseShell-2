@@ -18,9 +18,9 @@ public:
     {}
     virtual ~SockAddrIn() {}
 
-    operator struct sockaddr_in();
-    operator struct sockaddr_in*();
-    operator struct sockaddr*();
+    operator struct sockaddr_in() noexcept;
+    operator struct sockaddr_in*() noexcept;
+    operator struct sockaddr*() noexcept;
 
 private:
     struct sockaddr_in m_sin;

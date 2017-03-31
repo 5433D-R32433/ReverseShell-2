@@ -11,6 +11,7 @@ int
 WinsockUDPClient::Send(
     const char *buffer,
     uint32_t buffer_size)
+noexcept
 {
     int sent_size = sendto(m_socket,
                            buffer,
@@ -31,6 +32,7 @@ int
 WinsockUDPClient::Recv(
     char *const buffer,
     uint32_t buffer_size)
+noexcept
 {
     int size_;
     int recv_size = recvfrom(m_socket,

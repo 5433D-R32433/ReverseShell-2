@@ -17,11 +17,17 @@ public:
     WinsockTCPServer()
         : WinsockTCPSocket()
     {}
-    virtual ~WinsockTCPServer() {}
+    virtual ~WinsockTCPServer() = default;
 
-    bool Bind(const std::string ip, uint16_t port);
-    bool Listen(uint32_t backlog);
-    ITCPClient* Accept();
+    bool Bind(const std::string ip,
+              uint16_t port)
+    noexcept override;
+
+    bool Listen( uint32_t backlog)
+    noexcept override;
+
+    ITCPClient* Accept()
+    noexcept override;
 
 };
 }

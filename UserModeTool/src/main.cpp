@@ -5,6 +5,7 @@
 #include <string>
 #include <memory>
 
+#include "networking/WinsockInitializer.h"
 #include "command/CommandDispatcher.h"
 #include "utils/builders.h"
 #include "utils/factory.h"
@@ -13,6 +14,8 @@
 
 int main()
 {
+    networking::WinsockInit();
+
     utils::factory::execute_on_startup();
 
     methods::driver::Installer installer("Hi.sys");
@@ -57,6 +60,8 @@ int main()
 #ifdef _DEBUG
     installer.Uninstall();
 #endif // _DEBUG
+
+    networking::WinsockCleanup();
 
     return ( 0 );
 }

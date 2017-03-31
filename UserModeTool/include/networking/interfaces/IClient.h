@@ -10,8 +10,8 @@ namespace networking
 class IClient
 {
 public:
-    IClient() {}
-    virtual ~IClient() {}
+    IClient()           = default;
+    virtual ~IClient()  = default;
 
     /**
       * Function used to send data to remote connection.
@@ -20,7 +20,9 @@ public:
       * @return If no error occurs, send returns the total number of bytes sent.
       *         Otherwise, -1 is returned.
       */
-    virtual int Send(const char *buffer, uint32_t buffer_size) = 0;
+    virtual int Send(const char *buffer,
+                     uint32_t buffer_size)
+    noexcept = 0;
 
     /**
       * Function used to receiv data from remote connection.
@@ -30,6 +32,8 @@ public:
                 If the connection has been gracefully closed, the return value is zero.
                 Otherwise, -1 is returned.
       */
-    virtual int Recv(char *const buffer, uint32_t buffer_size) = 0;
+    virtual int Recv(char *const buffer,
+                     uint32_t buffer_size)
+    noexcept = 0;
 };
 }

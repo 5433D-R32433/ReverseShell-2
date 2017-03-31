@@ -14,6 +14,7 @@ bool
 WinsockUDPServer::Bind(
     const std::string ip,
     uint16_t port)
+noexcept
 {
     m_addr = SockAddrIn(ip, port);
 
@@ -30,6 +31,7 @@ WinsockUDPServer::Recvfrom(
     ISocket* from,
     char *const buffer,
     uint32_t buffer_size)
+noexcept
 {
     struct sockaddr_in from_addr;
     int from_addr_len;
@@ -58,6 +60,7 @@ WinsockUDPServer::Sendto(
     ISocket* to,
     const char *buffer,
     uint32_t buffer_size)
+noexcept
 {
 
 

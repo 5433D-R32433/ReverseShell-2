@@ -12,8 +12,8 @@ class IUDPServer
     : public IServer
 {
 public:
-    IUDPServer() {}
-    ~IUDPServer() {}
+    IUDPServer()          = default;
+    virtual ~IUDPServer() = default;
 
     /**
       * The Recvfrom function receives a datagram and stores the source address.
@@ -23,7 +23,10 @@ public:
       * @return If no error occurs, Recvfrom returns the number of bytes received.
                 Otherwise, -1 is returned.
       */
-    virtual int Recvfrom(ISocket* from, char *const buffer, uint32_t buffer_size) = 0;
+    virtual int Recvfrom(ISocket* from,
+                         char *const buffer,
+                         uint32_t buffer_size)
+    noexcept = 0;
 
     /**
       * The Sendto function sends data to a specific destination.
@@ -33,7 +36,10 @@ public:
       * @return If no error occurs, send returns the total number of bytes sent.
       *         Otherwise, -1 is returned.
       */
-    virtual int Sendto(ISocket* to, const char *buffer, uint32_t buffer_size) = 0;
+    virtual int Sendto(ISocket* to,
+                       const char *buffer,
+                       uint32_t buffer_size)
+    noexcept = 0;
 
 };
 }

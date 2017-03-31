@@ -20,12 +20,15 @@ public:
     WinsockTCPSocket(struct sockaddr_in addr)
         : WinsockAddressedSocket(AF_INET, SOCK_STREAM, IPPROTO_TCP, addr)
     {}
-    WinsockTCPSocket(SOCKET socket, struct sockaddr_in addr)
+    WinsockTCPSocket(SOCKET socket,
+                     struct sockaddr_in addr)
         : WinsockAddressedSocket(socket, addr)
     {}
-    WinsockTCPSocket(const std::string& ip, uint16_t port)
+    WinsockTCPSocket(const std::string& ip,
+                     uint16_t port)
         : WinsockAddressedSocket(AF_INET, SOCK_STREAM, IPPROTO_TCP, ip, port)
     {}
-    virtual ~WinsockTCPSocket() {}
+
+    virtual ~WinsockTCPSocket() = default;
 };
 }

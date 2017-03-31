@@ -62,7 +62,8 @@ public:
           m_addr(sin)
     {}
 
-    virtual ~WinsockAddressedSocket() {}
+    WinsockAddressedSocket()          = default;
+    virtual ~WinsockAddressedSocket() = default;
 
 protected:
 

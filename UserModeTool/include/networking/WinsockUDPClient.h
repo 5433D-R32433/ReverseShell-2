@@ -31,10 +31,10 @@ public:
     WinsockUDPClient(const std::string& ip, uint16_t port)
         : WinsockUDPSocket(ip, port)
     {}
-    virtual ~WinsockUDPClient() {}
+    virtual ~WinsockUDPClient() = default;
 
-    int Send(const char *buffer, uint32_t buffer_size);
-    int Recv(char *const buffer, uint32_t buffer_size);
+    int Send(const char *buffer, uint32_t buffer_size) noexcept override;
+    int Recv(char *const buffer, uint32_t buffer_size) noexcept override;
 
 };
 }

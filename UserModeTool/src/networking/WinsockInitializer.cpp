@@ -2,24 +2,38 @@
 
 #include <winsock2.h>
 
-#include <stdexcept>
+#include <mutex>
 
 
-using namespace networking;
+static std::mutex init_mutex;
+static std::mutex clean_mutex;
+static bool initialized = false;
 
-WinsockInitializer::WinsockInitializer()
+int
+networking::WinsockInit()
 {
-    WORD wVersionRequested = MAKEWORD(2, 2);
-    WSADATA wsaData;
-    int err = WSAStartup(wVersionRequested, &wsaData);
+    std::lock_guard<std::mutex> lock(init_mutex);
 
-    if ( err )
+    if ( !initialized )
     {
-        throw std::runtime_error("WSA init failed");
+        initialized = true;
+        WORD wVersionRequested = MAKEWORD(2, 2);
+        WSADATA wsaData;
+        return ( WSAStartup(wVersionRequested, &wsaData) );
     }
+
+    return ( 0 );
 }
 
-WinsockInitializer::~WinsockInitializer()
+int
+networking::WinsockCleanup()
 {
-    WSACleanup();
+    std::lock_guard<std::mutex> lock(clean_mutex);
+
+    if ( initialized )
+    {
+        return ( WSACleanup() );
+    }
+
+    return ( 0 );
 }

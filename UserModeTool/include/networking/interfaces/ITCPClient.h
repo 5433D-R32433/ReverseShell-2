@@ -15,13 +15,14 @@ class ITCPClient
     : public IClient
 {
 public:
-    ITCPClient() {}
-    virtual ~ITCPClient() {}
+    ITCPClient()          = default;
+    virtual ~ITCPClient() = default;
 
     /**
       * Function used to connect to a remote tcp server.
       */
-    virtual bool Connect() = 0;
+    virtual bool Connect()
+    noexcept = 0;
 
 };
 }

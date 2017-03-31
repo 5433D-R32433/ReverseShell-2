@@ -23,7 +23,7 @@ public:
     WinsockUDPSocket(const std::string& ip, uint16_t port)
         : WinsockAddressedSocket(AF_INET, SOCK_STREAM, IPPROTO_TCP, ip, port)
     {}
-    virtual ~WinsockUDPSocket() {}
+    virtual ~WinsockUDPSocket() = default;
 
 };
 }

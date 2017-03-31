@@ -12,13 +12,16 @@ namespace networking
 class ISocket
 {
 public:
+    ISocket()           = default;
+    virtual ~ISocket()  = default;
 
     /**
       * Function used to close an existing socket.
       * @return If no error occured, Close returns true.
       *         Otherwise, false is returned.
       */
-    virtual bool Close() = 0;
+    virtual bool Close()
+    noexcept = 0;
 
 };
 }
