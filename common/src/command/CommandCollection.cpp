@@ -13,14 +13,10 @@ CommandCollection::Add(
     ICommandExecuter* new_command)
 noexcept
 {
-//    if ( !InBounds(new_command->m_tag) )
-//        return ( false );
-
     if ( nullptr != Find(new_command->m_tag) )
         return ( false );
 
-    m_commands[new_command->m_tag] =
-        std::unique_ptr<ICommandExecuter>(new_command);
+    m_commands[new_command->m_tag] = pointer_type(new_command);
 
     return ( true );
 }
@@ -57,6 +53,5 @@ CommandCollection::Find(
     tag_t tag)
 const noexcept
 {
-    std::cout << "hi" << '\n';
     return ( m_commands[tag].get() );
 }

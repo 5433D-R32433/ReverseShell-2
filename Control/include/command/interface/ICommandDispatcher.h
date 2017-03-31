@@ -28,7 +28,7 @@ public:
       * @return If an error occurs, nullptr is returned.
       *         Otherwise, a pointer to the matching instance is returned.
       */
-    virtual ICommandExecuter* Find(const std::string& name) const noexcept = 0;
+    virtual ICommandExecuter* FindByName(const std::string& name) const noexcept = 0;
 
     /**
       * Function receives a command, translates it to bytes array, sends it the remote

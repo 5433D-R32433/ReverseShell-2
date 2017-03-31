@@ -14,15 +14,13 @@
 using namespace command;
 
 ICommandExecuter*
-CommandManager::Find(
+CommandManager::FindByName(
     const std::string& name)
 const noexcept
 {
-    for ( auto& command : m_commands )
+    for ( const auto& command : m_commands )
     {
-        std::cout << command->m_name << '\n';
-
-        if ( command->m_name == name)
+        if ( (nullptr != command.get()) && command->m_name == name)
         {
             return ( command.get() );
         }
@@ -44,7 +42,7 @@ noexcept
         return ( false );
 
     // Find executer by command name
-    ICommandExecuter *executer = Find(command_parts[0]);
+    ICommandExecuter *executer = FindByName(command_parts[0]);
 
     if ( nullptr == executer )
         return ( false );

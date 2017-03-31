@@ -16,12 +16,8 @@ int main(int argc, char *argv[], char *envp[])
 
     networking::WinsockTCPServer connection;
 
-//    std::unique_ptr<command::CommandManager> dispatcher(
-//        utils::builders::BuildManager());
-
-    command::CommandManager *dispatcher = utils::builders::BuildManager();
-    command::ICommandExecuter* a = dispatcher->Find(0);
-    std::cout << a->m_name << '\n';
+    std::unique_ptr<command::CommandManager> dispatcher(
+        utils::builders::BuildManager());
 
     connection.Bind("192.168.1.17", 12121);
     connection.Listen(1);

@@ -5,7 +5,7 @@
 #include <memory>
 
 #include "interface/ICommandCollection.h"
-#include "interface/ITaggedCommand.h"
+#include "command/interface/ITaggedCommand.h"
 // Each project will include this from his own path
 #include "command/interface/ICommandExecuter.h"
 
@@ -44,11 +44,13 @@ public:
 
 protected:
 
+    using pointer_type = std::shared_ptr<ICommandExecuter>;
+
 	/**
 	  * The underlying table.
 	  * Objects will be deleted with object's destruction.
 	  */
-    std::array<std::unique_ptr<ICommandExecuter>,
+    std::array<pointer_type,
                std::numeric_limits<tag_t>::max()+1> m_commands = {};
 };
 }

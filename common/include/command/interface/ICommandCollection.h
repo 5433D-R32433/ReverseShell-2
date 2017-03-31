@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ITaggedCommand.h"
+#include "command/interface/ITaggedCommand.h"
 // Each project will include this from his own path
 #include "command/interface/ICommandExecuter.h"
 

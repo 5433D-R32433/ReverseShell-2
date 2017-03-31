@@ -23,12 +23,7 @@ public:
         : m_tag(tag)
     {}
 
-    virtual ~ITaggedCommand()
-    {
-#ifdef _DEBUG
-        std::cout << "ITaggedCommand::~ITaggedCommand()\n";
-#endif // _DEBUG
-    }
+    virtual ~ITaggedCommand() = default;
 
     /**
       * The described tag.

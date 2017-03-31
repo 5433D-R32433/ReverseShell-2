@@ -23,10 +23,10 @@ class CommandManager
       public CommandCollection
 {
 public:
-    CommandManager()          = default;
-    virtual ~CommandManager() = default;
+   CommandManager()          = default;
+   virtual ~CommandManager() = default;
 
-    ICommandExecuter* Find(const std::string& name) const noexcept override;
+    ICommandExecuter* FindByName(const std::string& name) const noexcept;// override;
 
     bool Dispatch(std::string& command,
                   networking::ITCPClient& connection)
