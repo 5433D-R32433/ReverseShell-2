@@ -24,7 +24,8 @@ public:
 
     bool Execute(char const *byte_array,
                  uint32_t length,
-                 networking::ITCPClient& connection);
+                 networking::ITCPClient& connection)
+    noexcept override;
 
 
 protected:
@@ -81,8 +82,6 @@ protected:
       *           Otherwise, false is returned.
       */
     bool SendLog(networking::ITCPClient& connection);
-
-
 
 };
 }

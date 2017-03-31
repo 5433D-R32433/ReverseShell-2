@@ -14,6 +14,8 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-D_DEBUG" />
+					<Add directory="Control/include/command" />
+					<Add directory="common/include/command" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -23,6 +25,8 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="Control/include/command" />
+					<Add directory="common/include/command" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -40,6 +44,9 @@
 		<Linker>
 			<Add option="-lWS2_32" />
 		</Linker>
+		<Unit filename="../common/include/command/CommandCollection.h" />
+		<Unit filename="../common/include/command/interface/ICommandCollection.h" />
+		<Unit filename="../common/include/command/interface/ITaggedCommand.h" />
 		<Unit filename="../common/include/networking/BasicWinsockSocket.h" />
 		<Unit filename="../common/include/networking/SockAddrIn.h" />
 		<Unit filename="../common/include/networking/WinsockAddressedSocket.h" />
@@ -56,6 +63,7 @@
 		<Unit filename="../common/include/networking/interfaces/ITCPClient.h" />
 		<Unit filename="../common/include/networking/interfaces/ITCPServer.h" />
 		<Unit filename="../common/include/networking/interfaces/IUDPServer.h" />
+		<Unit filename="../common/src/command/CommandCollection.cpp" />
 		<Unit filename="../common/src/networking/BasicWinsockSocket.cpp" />
 		<Unit filename="../common/src/networking/SockAddrIn.cpp" />
 		<Unit filename="../common/src/networking/WinsockInitializer.cpp" />
@@ -63,15 +71,16 @@
 		<Unit filename="../common/src/networking/WinsockTCPServer.cpp" />
 		<Unit filename="../common/src/networking/WinsockUDPClient.cpp" />
 		<Unit filename="../common/src/networking/WinsockUDPServer.cpp" />
-		<Unit filename="include/command/CommandDispatcher.h" />
+		<Unit filename="include/command/CommandManager.h" />
 		<Unit filename="include/command/execute/KeyloggerExecuter.h" />
 		<Unit filename="include/command/execute/ScreenshotExecuter.h" />
 		<Unit filename="include/command/interface/ICommandDispatcher.h" />
 		<Unit filename="include/command/interface/ICommandExecuter.h" />
+		<Unit filename="include/command/interface/INamedCommand.h" />
 		<Unit filename="include/methods/FileSaver.h" />
 		<Unit filename="include/utils/builders.h" />
 		<Unit filename="include/utils/string.h" />
-		<Unit filename="src/command/CommandDispatcher.cpp" />
+		<Unit filename="src/command/CommandManager.cpp" />
 		<Unit filename="src/command/execute/KeyloggerExecuter.cpp" />
 		<Unit filename="src/command/execute/ScreenshotExecuter.cpp" />
 		<Unit filename="src/main.cpp" />

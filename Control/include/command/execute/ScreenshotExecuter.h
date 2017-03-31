@@ -20,7 +20,7 @@ class ScreenshotExecuter
 {
 public:
     ScreenshotExecuter(tag_t tag, std::string name)
-        : ICommandExecuter(tag, std::move(name))
+        : ICommandExecuter(tag, name)
     {}
     virtual ~ScreenshotExecuter() = default;
 

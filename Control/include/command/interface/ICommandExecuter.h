@@ -1,17 +1,15 @@
 #pragma once
 
-#include <cstdint>
 #include <vector>
 #include <string>
 
 #include "networking/interfaces/ITCPClient.h"
+#include "command/interface/ITaggedCommand.h"
+#include "INamedCommand.h"
 
 
 namespace command
 {
-
-typedef uint8_t tag_t;
-
 /**
   * Class ICommandExecuter describes a simple command executer.
   *
@@ -22,13 +20,16 @@ typedef uint8_t tag_t;
   * ensure that both are unique to a command), which can be used to reference it.
   */
 class ICommandExecuter
+    : public ITaggedCommand,
+      public INamedCommand
 {
 public:
     ICommandExecuter(tag_t tag, const std::string& name)
-        : m_tag(tag),
-          m_name(name)
+        : ITaggedCommand(tag),
+          INamedCommand(name)
     {}
-    virtual ~ICommandExecuter() {}
+
+    virtual ~ICommandExecuter() = default;
 
     /**
       * Function gets a split command and generates its corresponding bytes array.
@@ -48,17 +49,5 @@ public:
       */
     virtual bool ProcessResponse(networking::ITCPClient& connection) = 0;
 
-    /**
-      * This tag is used to distinguish between different ICommandExecuter instances.
-      * It is also used to attribute a bytes array to the correct ICommandExecuter
-      * instance.
-      */
-    const tag_t m_tag;
-
-    /**
-      * The command name is used to reach the ICommandExecuter that matches user input.
-      * instance.
-      */
-    const std::string m_name;
 };
 }

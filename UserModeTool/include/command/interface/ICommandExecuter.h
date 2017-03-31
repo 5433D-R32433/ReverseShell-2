@@ -3,13 +3,11 @@
 #include <cstdint>
 
 #include "networking/interfaces/ITCPClient.h"
+#include "command/interface/ITaggedCommand.h"
 
 
 namespace command
 {
-
-typedef uint8_t tag_t;
-
 /**
   * Class ICommandExecuter describes a simple byte array processor.
   *
@@ -22,12 +20,14 @@ typedef uint8_t tag_t;
   * ICommandExecuter instance.
   */
 class ICommandExecuter
+    : public ITaggedCommand
 {
 public:
     ICommandExecuter(tag_t tag)
-        : m_tag(tag)
+        : ITaggedCommand(tag)
     {}
-    virtual ~ICommandExecuter() {}
+
+    virtual ~ICommandExecuter() = default;
 
     /**
       * Function receives a bytes array, does its designated local processing,
@@ -40,13 +40,8 @@ public:
       */
     virtual bool Execute(char const *byte_array,
                          uint32_t length,
-                         networking::ITCPClient& connection) = 0;
+                         networking::ITCPClient& connection)
+    noexcept = 0;
 
-    /**
-      * This tag is used to distinguish between different ICommandExecuter instances.
-      * It is also used to attribute a bytes array to the correct ICommandExecuter
-      * instance.
-      */
-    const tag_t m_tag;
 };
 }
