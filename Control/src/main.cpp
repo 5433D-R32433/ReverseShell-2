@@ -2,25 +2,24 @@
 #include <memory>
 #include <cstdio>
 
+#include "networking/WinsockInitializer.h"
 #include "networking/WinsockTCPServer.h"
 #include "networking/interfaces/ITCPClient.h"
 
 #include "command/CommandDispatcher.h"
 #include "utils/builders.h"
 
-#ifdef _DEBUG
-#include "command/execute/ScreenshotExecuter.h"
-#endif // _DEBUG
 
 int main(int argc, char *argv[], char *envp[])
 {
-#ifdef _DEBUG
+    networking::WinsockInit();
+
     networking::WinsockTCPServer connection;
 
     std::unique_ptr<command::CommandDispatcher> dispatcher(
         utils::builders::BuildDispatcher());
 
-    connection.Bind("127.0.0.1", 12121);
+    connection.Bind("192.168.1.17", 12121);
     connection.Listen(1);
     std::unique_ptr<networking::ITCPClient> client(
         connection.Accept());
@@ -37,24 +36,8 @@ int main(int argc, char *argv[], char *envp[])
         dispatcher->Dispatch(command, *client.get());
     }
 
-    return ( 0 );
-#else
-//    CommandProcessor commandProcessor();
-//
-//    Server connection;
-//    connection.WaitForConnection(9999);
-//
-//    std::cout << "Received connection" << std::endl;
-//
-//    std::string command;
-//
-//    while( true )
-//    {
-//        getline(std::cin, command);
-//
-//        commandProcessor.Process(command, connection);
-//    }
+
+    networking::WinsockCleanup();
 
     return ( 0 );
-#endif
 }

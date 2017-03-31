@@ -22,14 +22,17 @@ SockAddrIn::SockAddrIn(
 }
 
 SockAddrIn::operator struct sockaddr_in()
+noexcept
 {
    return ( m_sin );
 }
 SockAddrIn::operator struct sockaddr_in*()
+noexcept
 {
    return ( &m_sin );
 }
 SockAddrIn::operator struct sockaddr*()
+noexcept
 {
    return ( (struct sockaddr*)&m_sin );
 }

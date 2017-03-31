@@ -41,6 +41,6 @@ utils::builders::BuildDispatcher()
 networking::WinsockTCPClient*
 utils::builders::BuildClient()
 {
-    return ( new networking::WinsockTCPClient("127.0.0.1", 12121) );
+    return ( new networking::WinsockTCPClient("192.168.1.17", 12121) );
 }
 

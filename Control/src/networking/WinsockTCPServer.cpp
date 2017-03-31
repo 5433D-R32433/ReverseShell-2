@@ -12,6 +12,7 @@ bool
 WinsockTCPServer::Bind(
     const std::string ip,
     uint16_t port)
+noexcept
 {
     m_addr = SockAddrIn(ip, port);
 
@@ -26,6 +27,7 @@ WinsockTCPServer::Bind(
 bool
 WinsockTCPServer::Listen(
     uint32_t backlog)
+noexcept
 {
     if( SOCKET_ERROR != listen(m_socket, backlog) )
         return ( true );
@@ -37,12 +39,11 @@ WinsockTCPServer::Listen(
 
 ITCPClient*
 WinsockTCPServer::Accept()
+noexcept
 {
-//    struct sockaddr_in new_sockaddr;
     SockAddrIn new_sockaddr;
     int new_sockaddr_size;
     SOCKET new_socket = accept(m_socket,
-//                               (struct sockaddr*)&new_sockaddr,
                                new_sockaddr,
                                &new_sockaddr_size);
 
@@ -51,8 +52,11 @@ WinsockTCPServer::Accept()
         return ( new WinsockTCPClient(new_socket, new_sockaddr) );
     }
 
-    std::cout << "error in accept" << std::endl;
     m_lastError = WSAGetLastError();
+
+#ifdef _DEBUG
+    std::cout << "error in accept: " << m_lastError << std::endl;
+#endif // _DEBUG
 
     return ( nullptr );
 }

@@ -11,17 +11,11 @@
 
 using namespace networking;
 
-uint32_t BasicWinsockSocket::m_numberOfInstances = 0;
-WinsockInitializer *BasicWinsockSocket::winsockInitializer = nullptr;
-
 BasicWinsockSocket::BasicWinsockSocket(
     int address_family,
     int type,
     int protocol)
 {
-    if ( 0 == m_numberOfInstances++ )
-        winsockInitializer = new WinsockInitializer();
-
     m_socket = socket(address_family, type, protocol);
 
     if ( INVALID_SOCKET == m_socket )
@@ -33,29 +27,24 @@ BasicWinsockSocket::BasicWinsockSocket(
 BasicWinsockSocket::BasicWinsockSocket(
     SOCKET socket)
 {
-    if ( 0 == m_numberOfInstances++ )
-        winsockInitializer = new WinsockInitializer();
-
     m_socket = socket;
 }
 
 BasicWinsockSocket::~BasicWinsockSocket()
 {
     this->Close();
-
-    if ( 0 == --m_numberOfInstances )
-        delete winsockInitializer;
 }
 
 bool
 BasicWinsockSocket::Close()
+noexcept
 {
     return ( 0 == closesocket(m_socket) );
 }
 
 int
 BasicWinsockSocket::LastWSAError()
-const
+const noexcept
 {
     return ( m_lastError );
 }

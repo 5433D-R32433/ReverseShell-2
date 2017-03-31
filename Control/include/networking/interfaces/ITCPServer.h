@@ -12,8 +12,8 @@ class ITCPServer
     : public IServer
 {
 public:
-    ITCPServer() {}
-    ~ITCPServer() {}
+    ITCPServer()          = default;
+    virtual ~ITCPServer() = default;
 
     /**
       * The listen function places a socket in a state
@@ -22,7 +22,8 @@ public:
       * @return if no error occured, Listen returns true.
                 Otherwise, false is returned.
       */
-    virtual bool Listen(uint32_t backlog) = 0;
+    virtual bool Listen( uint32_t backlog)
+    noexcept = 0;
 
     /**
       * The accept function permits an incoming connection attempt on a socket.
@@ -30,7 +31,8 @@ public:
                 Accept returns a must-be-deleted pointer to ISocket,
                 Otherwise, nullptr is returned.
       */
-    virtual ITCPClient* Accept() = 0;
+    virtual ITCPClient* Accept()
+    noexcept = 0;
 
 };
 }

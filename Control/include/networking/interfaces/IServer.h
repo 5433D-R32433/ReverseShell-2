@@ -11,8 +11,8 @@ namespace networking
 class IServer
 {
 public:
-    IServer() {}
-    ~IServer() {}
+    IServer()           = default;
+    virtual ~IServer()  = default;
 
     /**
       * Associate A local address with server connection.
@@ -21,7 +21,9 @@ public:
                     octal or hexadecimal as specified in the C language.
       * @param port -
       */
-    virtual bool Bind(const std::string ip, uint16_t port) = 0;
+    virtual bool Bind(const std::string ip,
+                      uint16_t port)
+    noexcept = 0;
 
 };
 }

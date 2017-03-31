@@ -34,11 +34,11 @@ public:
     WinsockTCPClient(SOCKET socket, struct sockaddr_in addr) :
         WinsockTCPSocket(socket, addr)
     {}
-    virtual ~WinsockTCPClient() {}
+    virtual ~WinsockTCPClient() = default;
 
-    int Send(const char *buffer, uint32_t buffer_size);
-    int Recv(char *const buffer, uint32_t buffer_size);
-    bool Connect();
+    int Send(const char *buffer, uint32_t buffer_size) noexcept override;
+    int Recv(char *const buffer, uint32_t buffer_size) noexcept override;
+    bool Connect() noexcept override;
 
 };
 }

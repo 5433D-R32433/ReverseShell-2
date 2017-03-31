@@ -23,6 +23,7 @@ WinsockTCPClient::WinsockTCPClient(
 
 bool
 WinsockTCPClient::Connect()
+noexcept
 {
     if ( connect(m_socket, m_addr, sizeof(m_addr))
             >= 0)
@@ -37,6 +38,7 @@ int
 WinsockTCPClient::Send(
     const char *buffer,
     uint32_t buffer_size)
+noexcept
 {
     int sent_size = send(m_socket, buffer, buffer_size, 0);
 
@@ -52,6 +54,7 @@ int
 WinsockTCPClient::Recv(
     char *const buffer,
     uint32_t buffer_size)
+noexcept
 {
     int recv_size = recv(m_socket, buffer, buffer_size, 0);
 
