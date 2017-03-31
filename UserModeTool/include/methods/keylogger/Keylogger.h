@@ -32,7 +32,7 @@ public:
     Keylogger& operator=(const Keylogger& other) = delete;
 
     Keylogger(Keylogger&& other)                 = default;
-    Keylogger& operator=(Keylogger&& other) = delete;
+    Keylogger& operator=(Keylogger&& other) 	 = default;
 
     /**
       * This functions starts the logging thread.
