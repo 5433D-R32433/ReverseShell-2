@@ -28,7 +28,7 @@
 			<Add option="-Wall" />
 			<Add option="-std=c99" />
 			<Add option="-m32" />
-			<Add directory="C:/Users/Or/Desktop/Hi_Driver/include" />
+			<Add directory="include" />
 			<Add directory="C:/MyPrograms/mingw64/x86_64-w64-mingw32/include/ddk" />
 			<Add directory="C:/MyPrograms/mingw64/x86_64-w64-mingw32/include" />
 		</Compiler>

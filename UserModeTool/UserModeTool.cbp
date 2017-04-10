@@ -14,8 +14,6 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-D_DEBUG" />
-					<Add directory="include/methods/driver" />
-					<Add directory="include/utils/registry" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -23,10 +21,6 @@
 				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
-				<Compiler>
-					<Add directory="include/methods/driver" />
-					<Add directory="include/utils/registry" />
-				</Compiler>
 			</Target>
 		</Build>
 		<Compiler>
@@ -35,11 +29,13 @@
 			<Add option="-m32" />
 			<Add directory="include" />
 			<Add directory="../common/include" />
+			<Add directory="C:/MyPrograms/mingw64/x86_64-w64-mingw32/include" />
 		</Compiler>
 		<Linker>
 			<Add option="-m32" />
 			<Add option="-lWS2_32" />
 			<Add library="gdi32" />
+			<Add library="C:/MyPrograms/mingw64/x86_64-w64-mingw32/lib32/libfwpuclnt.a" />
 		</Linker>
 		<Unit filename="../common/include/command/CommandCollection.h" />
 		<Unit filename="../common/include/command/interface/ICommandCollection.h" />
@@ -60,6 +56,7 @@
 		<Unit filename="../common/include/networking/interfaces/ITCPClient.h" />
 		<Unit filename="../common/include/networking/interfaces/ITCPServer.h" />
 		<Unit filename="../common/include/networking/interfaces/IUDPServer.h" />
+		<Unit filename="../common/include/stl/unique.h" />
 		<Unit filename="../common/src/command/CommandCollection.cpp" />
 		<Unit filename="../common/src/networking/BasicWinsockSocket.cpp" />
 		<Unit filename="../common/src/networking/SockAddrIn.cpp" />

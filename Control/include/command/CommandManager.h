@@ -23,8 +23,8 @@ class CommandManager
       public CommandCollection
 {
 public:
-   CommandManager()          = default;
-   virtual ~CommandManager() = default;
+    CommandManager()          = default;
+    virtual ~CommandManager() = default;
 
     ICommandExecuter* FindByName(const std::string& name) const noexcept;// override;
 

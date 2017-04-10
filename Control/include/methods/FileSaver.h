@@ -1,7 +1,7 @@
 #pragma once
 
 #include <fstream>
-#include <memory>
+#include <string>
 
 #include "networking/interfaces/ITCPClient.h"
 
@@ -24,9 +24,9 @@ public:
     FileSaver(const FileSaver& other)            = delete;
     FileSaver& operator=(const FileSaver& other) = delete;
 
-    // Move is forbidden
-    FileSaver(FileSaver&& other)            = delete;
-    FileSaver& operator=(FileSaver&& other) = delete;
+    // Move is defaulted
+    FileSaver(FileSaver&& other)            = default;
+    FileSaver& operator=(FileSaver&& other) = default;
 
     /**
       * This function saves a single file that is received from remote tool.

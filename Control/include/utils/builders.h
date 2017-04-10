@@ -12,10 +12,10 @@ namespace utils
   */
 namespace builders
 {
-    command::ICommandExecuter* BuildScreenshotExecuter();
+    std::unique_ptr<command::ICommandExecuter> BuildScreenshotExecuter();
 
-    command::ICommandExecuter* BuildKeyloggerExecuter();
+    std::unique_ptr<command::ICommandExecuter> BuildKeyloggerExecuter();
 
-    command::CommandManager* BuildManager();
+    std::unique_ptr<command::CommandManager> BuildManager();
 }
 }

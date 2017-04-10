@@ -61,7 +61,10 @@ noexcept
     if ( SOCKET_ERROR != recv_size )
         return ( recv_size );
 
-    std::cout << "error in recv!" << std::endl;
+#ifdef _DEBUG
+    std::cerr << "error in recv!" << std::endl;
+#endif // _DEBUG
+
     m_lastError = WSAGetLastError();
 
     return ( -1 );

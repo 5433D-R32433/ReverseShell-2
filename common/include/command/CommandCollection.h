@@ -33,9 +33,9 @@ public:
 	CommandCollection(const CommandCollection& other) 			 = delete;
 	CommandCollection& operator=(const CommandCollection& other) = delete;
 
-	// Move is forbidden
-	CommandCollection(CommandCollection&& other) 	  			 = delete;
-	CommandCollection& operator=(CommandCollection&& other) 	 = delete;
+	// Move is defaulted
+	CommandCollection(CommandCollection&& other) 	  			 = default;
+	CommandCollection& operator=(CommandCollection&& other) 	 = default;
 
     bool Add(ICommandExecuter* new_command) 		 noexcept override;
     bool Remove(ICommandExecuter *command_to_remove) noexcept override;

