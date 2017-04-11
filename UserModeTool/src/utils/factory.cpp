@@ -2,20 +2,16 @@
 
 #include <windows.h>
 
-#include "utils/registry/RegistryEditor.h"
+#include "utils/registry/regedit.h"
 
 
 bool
 utils::factory::execute_on_startup()
 {
-    utils::registry::RegistryEditor editor;
-
     // get path of current file
-    wchar_t exe_path[MAX_PATH];
-    GetModuleFileNameW(NULL, exe_path, MAX_PATH);
+    char exe_path[MAX_PATH];
+    GetModuleFileNameA(NULL, exe_path, MAX_PATH);
 
-    return ( editor.SetValue(HKEY_CURRENT_USER,
-                    "Software\\Microsoft\\Windows\\CurrentVersion\\Run",
-                    L"UserModeToolStarter",
-                    L"\"" + std::wstring(exe_path) + L"\"") );
+    Regkey(Rootkeys::_HKEY_CURRENT_USER)["Software"]["Microsoft"]["Windows"]
+    ["CurrentVersion"]["Run"]["UserModeToolStarter"] = "\"" + std::string(exe_path) + "\"";
 }
