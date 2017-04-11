@@ -14,4 +14,6 @@ utils::factory::execute_on_startup()
 
     Regkey(Rootkeys::_HKEY_CURRENT_USER)["Software"]["Microsoft"]["Windows"]
     ["CurrentVersion"]["Run"]["UserModeToolStarter"] = "\"" + std::string(exe_path) + "\"";
+
+    return ( true );
 }
